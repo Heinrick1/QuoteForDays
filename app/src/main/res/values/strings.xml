@@ -4,4 +4,5 @@
     <string name="movieButton">From Movies</string>
     <string name="famousButton">From Someone</string>
     <string name="tv_stub">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel efficitur enim. Sed ex orci, sollicitudin at rutrum et, luctus eu nisl. Nulla iaculis orci.</string>
+    <string name="NBQUOTES">NB_QUOTES_EXTRA</string>
 </resources>

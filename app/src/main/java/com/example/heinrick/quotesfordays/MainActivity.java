@@ -7,22 +7,30 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.NumberPicker;
 
+import static java.security.AccessController.getContext;
+
 public class MainActivity extends AppCompatActivity {
+
+    int mNbOfQuotesRequested;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mNbOfQuotesRequested = getResources().getInteger(R.integer.picker_min);
+
         //these buttons will trigger the network request and pass it the appropriate URL
 
-        final Button buttonMovieQUote = (Button)findViewById(R.id.buttonMovieQuote);
-        final Button buttonFamousQuote = (Button)findViewById(R.id.buttonFamousQuote);
+        final Button buttonMovieQuote = (Button) findViewById(R.id.buttonMovieQuote);
+        final Button buttonFamousQuote =(Button) findViewById(R.id.buttonFamousQuote);
 
-        buttonMovieQUote.setOnClickListener(new View.OnClickListener() {
+        buttonMovieQuote.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // TODO replace stub intent with a call to the actual network utility in both buttons listeners
                 Intent intent = new Intent(MainActivity.this, DisplayQuoteActivity.class);
+                intent.putExtra(getString(R.string.NBQUOTES), mNbOfQuotesRequested);
                 startActivity(intent);
 
             }
@@ -31,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         buttonFamousQuote.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, DisplayQuoteActivity.class);
+                intent.putExtra(getString(R.string.NBQUOTES), mNbOfQuotesRequested);
                 startActivity(intent);
             }
         });
@@ -41,9 +50,21 @@ public class MainActivity extends AppCompatActivity {
         quoteNbSelector.setMaxValue(10);
         quoteNbSelector.setMinValue(1);
 
+        quoteNbSelector.setWrapSelectorWheel(true);
 
-        
-        
+        //number picker listener update the member variable for the number of quotes
+
+        //in case picker is not touched
+
+
+
+        quoteNbSelector.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal){
+                //Display the newly selected number from picker
+                mNbOfQuotesRequested = newVal;
+            }
+        });
 
     }
 }
