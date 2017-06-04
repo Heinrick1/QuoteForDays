@@ -17,9 +17,10 @@ import okhttp3.Response;
 public class NetworkUtilities {
 
 
-
-
-    //1. Method that builds the url
+    /*adds the GET parameters to the base andruxnet URL
+    *@params    - String cat: the category of the quote, either "movie" or "famous"
+    *           - String count: the number of quotes requested ( 1 - 10 )
+    *@return    - URL base URL with the get request*/
 
     public static URL buildURL (String cat, String count) {
 
@@ -41,8 +42,15 @@ public class NetworkUtilities {
 
         return url;
     }
-
     //2. Make request
+
+
+    /*
+    * fetches the response from the random quote API
+    * @param URL url is the URL including the get parameters
+    * @return String - raw Json string containing a list of 1 - 10 quotes
+    * */
+
     public static String getResponse (URL url) throws IOException{
 
         // 1. Create client

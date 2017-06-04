@@ -1,21 +1,36 @@
 package com.example.heinrick.quotesfordays;
 
 import android.content.Intent;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.AsyncTaskLoader;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.NumberPicker;
 
-import static java.security.AccessController.getContext;
+import com.example.heinrick.quotesfordays.Utilities.JsonUtility;
+import com.example.heinrick.quotesfordays.Utilities.NetworkUtilities;
+import com.example.heinrick.quotesfordays.models.Quote;
 
-public class MainActivity extends AppCompatActivity {
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<String> {
 
     int mNbOfQuotesRequested;
+
+    //int constant for loader ID
+    private static final int QUOTE_FOR_DAYS_GEN_LOADER = 11;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        // TODO implement an AsynctaskLoader for the network part
+        // TODO implement a recyclerview to display result in the displayquote Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -29,18 +44,22 @@ public class MainActivity extends AppCompatActivity {
         buttonMovieQuote.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // TODO replace stub intent with a call to the actual network utility in both buttons listeners
-                Intent intent = new Intent(MainActivity.this, DisplayQuoteActivity.class);
+                getQuotesFromServer("movie", mNbOfQuotesRequested );
+
+                /*Intent intent = new Intent(MainActivity.this, DisplayQuoteActivity.class);
                 intent.putExtra(getString(R.string.NBQUOTES), mNbOfQuotesRequested);
-                startActivity(intent);
+                startActivity(intent);*/
 
             }
         });
 
         buttonFamousQuote.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, DisplayQuoteActivity.class);
+                getQuotesFromServer("famous", mNbOfQuotesRequested );
+
+                /*Intent intent = new Intent(MainActivity.this, DisplayQuoteActivity.class);
                 intent.putExtra(getString(R.string.NBQUOTES), mNbOfQuotesRequested);
-                startActivity(intent);
+                startActivity(intent);*/
             }
         });
         
@@ -65,6 +84,92 @@ public class MainActivity extends AppCompatActivity {
                 mNbOfQuotesRequested = newVal;
             }
         });
+
+    }
+
+    //creates a new loader
+    @Override
+    public Loader<String> onCreateLoader(int id, final Bundle args) {
+
+        return new AsyncTaskLoader<String>(this) {
+
+            //field to cache my data
+            String quoteList = null;
+
+
+            @Override
+            protected void onStartLoading() {
+                super.onStartLoading();
+                if (args == null){
+                    return;
+                }
+                else{
+                    forceLoad();
+                }
+            }
+
+
+            /*returns the result of the load to the listener*/
+            public void deliverResult(String list){
+                quoteList = list;
+                super.deliverResult(list);
+            }
+            //the loader makes the network call on it's thread
+            @Override
+            public String loadInBackground() {
+
+                String stringUrl = args.getString("URL_EXTRA");
+
+                if(stringUrl == null) return null;
+
+                try {
+                    //converts string url with get request to URL object
+                    URL url = new URL(stringUrl);
+
+                    //fetches response from server and returns the String
+                    return NetworkUtilities.getResponse(url);
+
+
+
+
+                }
+                catch(IOException e){
+                    e.printStackTrace();
+                    return null;
+                }
+
+            }
+        };
+    }
+
+    //What happends when the loader is done with doInBackground, the data has been fetched from the server
+    @Override
+    public void onLoadFinished(Loader<String> loader, String data) {
+         Intent intent = new Intent(MainActivity.this, DisplayQuoteActivity.class);
+                intent.putExtra(getString(R.string.QUOTE_LIST_EXTRA), data);
+                startActivity(intent);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<String> loader) {
+
+    }
+
+    /*initializes and calls the loader
+    * */
+    public void getQuotesFromServer(String category, int count){
+
+        //building the URL
+        URL url = NetworkUtilities.buildURL(category, Integer.toString(count));
+
+        //Bundle for the loader, containing the already built url
+        Bundle queryBundle  = new Bundle();
+        queryBundle.putString("URL_EXTRA", url.toString());
+
+        LoaderManager loaderManager = getSupportLoaderManager();
+        Loader<String> quoteLoader = loaderManager.getLoader(QUOTE_FOR_DAYS_GEN_LOADER);
+
+        loaderManager.restartLoader(QUOTE_FOR_DAYS_GEN_LOADER, queryBundle, this);
 
     }
 }

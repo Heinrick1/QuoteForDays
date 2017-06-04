@@ -18,6 +18,11 @@ import java.util.ArrayList;
 public class JsonUtility {
 
     //parses the Json array of quotes and returns a quote arrayList
+
+    /*Takes a Json input String and formats it into an ArrayList of Quote objects
+    * @param    - String JsonInput: Json String
+    * @return   - ArrayList<Quotes>*/
+
     public static ArrayList<Quote> formatJsonInput (String JsonInput){
 
         ArrayList<Quote> quotes = new ArrayList<Quote>();

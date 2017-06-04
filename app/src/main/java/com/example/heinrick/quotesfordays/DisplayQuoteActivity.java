@@ -21,18 +21,8 @@ public class DisplayQuoteActivity extends AppCompatActivity {
 
         TextView mtv = (TextView) this.findViewById(R.id.tv_quote);
 
-        String result = "nothing happened";
-
-        URL url = NetworkUtilities.buildURL("movies","10");
-        try {
-            result = NetworkUtilities.getResponse(url);
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
-
-        int testNum = this.getIntent().getIntExtra((getString(R.string.NBQUOTES)).toString(), 1);
-        mtv.setText(result);
+        String test = getIntent().getStringExtra((getString(R.string.QUOTE_LIST_EXTRA)));
+        mtv.setText(test);
 
 
     }
