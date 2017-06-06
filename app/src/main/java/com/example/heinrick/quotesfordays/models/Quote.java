@@ -6,7 +6,7 @@ package com.example.heinrick.quotesfordays.models;
 
 public class Quote {
 
-    private String body;
+    private String quote;
 
     private String author;
 
@@ -15,7 +15,7 @@ public class Quote {
 
 
     public String getBody() {
-        return body;
+        return quote;
     }
 
     public String getAuthor() {
@@ -28,7 +28,7 @@ public class Quote {
 
     @Override
     public String toString(){
-        return "\nContent: " + body + "\nAuthor: " + author + "\ncategory: " + category;
+        return "\nContent: " + quote + "\nAuthor: " + author + "\ncategory: " + category;
     }
 
 
