@@ -16,7 +16,10 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="46dp"
-        android:text="@string/main_screen_tv"
+        android:text="Select the number of quotes you would like and hit a button !"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="25sp"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -24,12 +27,12 @@
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintTop_creator="1"
-        android:textSize="22sp"
+
         />
 
     <NumberPicker
         android:id="@+id/quoteNbSelector"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
@@ -46,14 +49,16 @@
         app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="8dp"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.227" />
 
     <Button
         android:id="@+id/buttonMovieQuote"
-        android:layout_width="142dp"
-        android:layout_height="43dp"
-        android:layout_marginBottom="106dp"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="152dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="102dp"
         android:layout_marginLeft="16dp"
+        android:background="@android:color/holo_blue_light"
         android:text="@string/movieButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -62,10 +67,12 @@
 
     <Button
         android:id="@+id/buttonFamousQuote"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="152dp"
-        android:layout_height="47dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="102dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginRight="16dp"
+        android:background="@android:color/holo_blue_light"
         android:text="@string/famousButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
