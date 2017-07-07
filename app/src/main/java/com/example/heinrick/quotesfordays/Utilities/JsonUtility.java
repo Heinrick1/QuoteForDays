@@ -47,6 +47,7 @@ public class JsonUtility {
                 quoteList = new ArrayList < > ();
                 Quote quote = gson.fromJson(reader, Quote.class);
                 quoteList.add(quote);
+
             }
 
             /*while (reader.hasNext()) {
