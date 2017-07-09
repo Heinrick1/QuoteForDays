@@ -3,7 +3,10 @@ package com.example.heinrick.quotesfordays;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.LinearSnapHelper;
+import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SnapHelper;
 import android.view.View;
 import android.widget.TextView;
 
@@ -19,7 +22,7 @@ public class DisplayQuoteActivity extends AppCompatActivity {
 
 
     private RecyclerView aRecyclerV;
-    // COMPLETED (35) Add a private ForecastAdapter variable called mForecastAdapter
+
     private QfdAdapter aAdapter;
 
 
@@ -38,9 +41,11 @@ public class DisplayQuoteActivity extends AppCompatActivity {
 
         aAdapter.setQuoteList(quoteList);
 
-
+        // using a snaphelper on my recycler view to make it display one quote at a time.
         aRecyclerV = (RecyclerView) findViewById(R.id.rcv_displayQuote);
-
+        SnapHelper mSnapHelper = new LinearSnapHelper();
+        mSnapHelper.attachToRecyclerView(aRecyclerV);
+a
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 
