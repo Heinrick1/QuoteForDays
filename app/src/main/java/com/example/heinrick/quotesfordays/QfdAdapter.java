@@ -19,6 +19,7 @@ public class QfdAdapter extends RecyclerView.Adapter<QfdAdapter.QdfAdapterViewHo
 
     private ArrayList<Quote> aQuotes;
 
+
     public QfdAdapter(){
 
 

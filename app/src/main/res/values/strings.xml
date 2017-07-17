@@ -6,4 +6,7 @@
     <string name="tv_stub">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel efficitur enim. Sed ex orci, sollicitudin at rutrum et, luctus eu nisl. Nulla iaculis orci.</string>
     <string name="QUOTE_LIST_EXTRA">QUOTE_LIST_EXTRA</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

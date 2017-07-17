@@ -1,34 +1,26 @@
 package com.example.heinrick.quotesfordays;
 
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.LinearSnapHelper;
-import android.support.v7.widget.PagerSnapHelper;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SnapHelper;
-import android.view.View;
-import android.widget.TextView;
 
 import com.example.heinrick.quotesfordays.Utilities.JsonUtility;
-import com.example.heinrick.quotesfordays.Utilities.NetworkUtilities;
 import com.example.heinrick.quotesfordays.models.Quote;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class DisplayQuoteActivity extends AppCompatActivity {
 
 
-    private RecyclerView aRecyclerV;
+    private ViewPager aPager;
 
-    private QfdAdapter aAdapter;
+    private QfdSwipeAdapter aAdapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_display_quote);
 
         String stringQuoteList = getIntent().getStringExtra((getString(R.string.QUOTE_LIST_EXTRA)));
@@ -37,25 +29,14 @@ public class DisplayQuoteActivity extends AppCompatActivity {
 
         //loads recycler view layout
 
-        aAdapter = new QfdAdapter();
+        aPager = (ViewPager) findViewById(R.id.viewpager);
+        aAdapter = new QfdSwipeAdapter(this);
 
+
+
+        aPager.setAdapter(aAdapter);
         aAdapter.setQuoteList(quoteList);
 
-        // using a snaphelper on my recycler view to make it display one quote at a time.
-        aRecyclerV = (RecyclerView) findViewById(R.id.rcv_displayQuote);
-        SnapHelper mSnapHelper = new LinearSnapHelper();
-        mSnapHelper.attachToRecyclerView(aRecyclerV);
-a
-        LinearLayoutManager layoutManager
-                = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-
-        aRecyclerV.setLayoutManager(layoutManager);
-
-        aRecyclerV.setHasFixedSize(true);
-
-
-
-        aRecyclerV.setAdapter(aAdapter);
 
 
     }
