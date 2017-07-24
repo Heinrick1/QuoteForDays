@@ -72,7 +72,7 @@ public class QfdSwipeAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-        return view == (ConstraintLayout) object;
+        return view ==  object;
     }
 
     public void setQuoteList (ArrayList<Quote> quotes){
