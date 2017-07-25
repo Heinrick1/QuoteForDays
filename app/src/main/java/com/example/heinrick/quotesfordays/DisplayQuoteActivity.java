@@ -52,28 +52,6 @@ public class DisplayQuoteActivity extends FragmentActivity {
         aQuotes = quotes;
     }
 
-    private class QdfPagerAdapter extends FragmentStatePagerAdapter {
-
-            public QdfPagerAdapter(FragmentManager fm) {
-                super(fm);
-            }
-
-            @Override
-            public Fragment getItem(int position) {
-                return new QuoteFragment();
-            }
-
-            @Override
-            public int getCount() {
-                return aQuotes.size();
-            }
-
-            public void setQuoteList (ArrayList<Quote> quotes){
-                aQuotes = quotes;
-                notifyDataSetChanged();
-            }
-
-        }
-    }
+}
 
 
