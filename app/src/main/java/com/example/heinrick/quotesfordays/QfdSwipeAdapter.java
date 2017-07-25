@@ -3,6 +3,7 @@ package com.example.heinrick.quotesfordays;
 import android.content.Context;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,9 @@ public class QfdSwipeAdapter extends PagerAdapter {
 
     private Context ct;
     private LayoutInflater linft;
+   // private View quoteView;
+   // private TextView pBodyView;
+   // private TextView pAuthorView;
 
 
     public QfdSwipeAdapter(Context pCt){
@@ -45,20 +49,22 @@ public class QfdSwipeAdapter extends PagerAdapter {
         String quoteBody = curQuote.getBody() ;
         String quoteAuthor = curQuote.getAuthor();
 
+        //inflating the layout and populating the textvies associated to the current quote
 
         linft = (LayoutInflater) ct.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View quoteView = linft.inflate(R.layout.activity_display_quote, container, false);
+        View quoteView = linft.inflate(R.layout.quote_layout, container, false);
 
-        TextView pBodyView= (TextView) quoteView.findViewById(R.id.tv_quote_body);
+        TextView pBodyView = (TextView) quoteView.findViewById(R.id.tv_quote_body);
         TextView pAuthorView = (TextView) quoteView.findViewById(R.id.tv_quote_author);
-
-
 
         pBodyView.setText(quoteBody);
         pAuthorView.setText(quoteAuthor);
 
-        container.addView(quoteView);
+
+        // adding the quote view to the view pager
+        ViewPager viewp = (ViewPager) container;
+        viewp.addView(quoteView);
 
         return quoteView;
 
@@ -66,13 +72,15 @@ public class QfdSwipeAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        container.removeView((ConstraintLayout)object);
-        super.destroyItem(container, position, object);
+
+        //destroys the current quoteView
+        ((ViewPager) container).removeView((View) object);
+
     }
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-        return view ==  object;
+        return view == (ConstraintLayout) object;
     }
 
     public void setQuoteList (ArrayList<Quote> quotes){

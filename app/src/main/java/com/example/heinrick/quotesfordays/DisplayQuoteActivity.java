@@ -23,7 +23,7 @@ public class DisplayQuoteActivity extends FragmentActivity {
     private ViewPager mPager;
 
     //Pager adapter provides pages to viewpager
-    private PagerAdapter mPagerAdapter;
+    private QfdSwipeAdapter mPagerAdapter;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class DisplayQuoteActivity extends FragmentActivity {
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = (ViewPager) findViewById(R.id.viewpager);
 
-        mPagerAdapter = new QdfPagerAdapter(getSupportFragmentManager());
+        mPagerAdapter = new QfdSwipeAdapter(this);
 
         //retrieve quotes from start intent
         String stringQuoteList = getIntent().getStringExtra((getString(R.string.QUOTE_LIST_EXTRA)));
