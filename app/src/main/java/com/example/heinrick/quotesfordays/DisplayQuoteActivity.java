@@ -8,6 +8,9 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.example.heinrick.quotesfordays.Utilities.JsonUtility;
 import com.example.heinrick.quotesfordays.models.Quote;
@@ -15,7 +18,7 @@ import com.example.heinrick.quotesfordays.models.Quote;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class DisplayQuoteActivity extends FragmentActivity {
+public class DisplayQuoteActivity extends AppCompatActivity {
 
     //ArrayList of retrieved and serialized quotes
     ArrayList<Quote> aQuotes = new ArrayList<Quote>();
@@ -51,6 +54,27 @@ public class DisplayQuoteActivity extends FragmentActivity {
     public void setQuoteList (ArrayList<Quote> quotes){
         aQuotes = quotes;
     }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.displayed_quote_menu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.saveItem:
+                //newGame();
+                return true;
+            case R.id.shareItem:
+                //showHelp();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
 }
 
