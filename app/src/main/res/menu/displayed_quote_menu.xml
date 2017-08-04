@@ -10,4 +10,8 @@
         android:id="@+id/shareItem"
         android:title="@string/SHARE_MENU_ITEM"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/listItem"
+        android:title="@string/LIST_MENU_ITEM"
+        app:showAsAction="ifRoom" />
 </menu>

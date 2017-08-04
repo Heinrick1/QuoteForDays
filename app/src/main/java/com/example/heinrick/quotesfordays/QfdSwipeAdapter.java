@@ -26,6 +26,9 @@ public class QfdSwipeAdapter extends PagerAdapter {
 
     private Context ct;
     private LayoutInflater linft;
+
+    private Quote currentQuote;
+
    // private View quoteView;
    // private TextView pBodyView;
    // private TextView pAuthorView;
@@ -33,6 +36,7 @@ public class QfdSwipeAdapter extends PagerAdapter {
 
     public QfdSwipeAdapter(Context pCt){
         ct = pCt;
+        currentQuote = new Quote("Boom", "Dickens");
     }
 
     @Override
@@ -44,10 +48,10 @@ public class QfdSwipeAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
 
         // retrieving data from the quote at the current position
-        Quote curQuote = aQuotes.get(position);
+        currentQuote= aQuotes.get(position);
 
-        String quoteBody = curQuote.getBody() ;
-        String quoteAuthor = curQuote.getAuthor();
+        String quoteBody = currentQuote.getBody() ;
+        String quoteAuthor = currentQuote.getAuthor();
 
         //inflating the layout and populating the textvies associated to the current quote
 
@@ -87,4 +91,12 @@ public class QfdSwipeAdapter extends PagerAdapter {
         aQuotes = quotes;
         notifyDataSetChanged();
     }
+
+    //returns a clone of the current Quote to maintain limited access to quote values
+    public Quote curQuote (){
+        return currentQuote;
+        //return currentQuote.clone();
+    };
+
+
 }

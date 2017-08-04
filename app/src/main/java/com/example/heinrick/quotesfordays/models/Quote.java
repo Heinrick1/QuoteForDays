@@ -4,7 +4,7 @@ package com.example.heinrick.quotesfordays.models;
  * Created by Heinrick on 2017-06-02.
  */
 
-public class Quote {
+public class Quote implements java.io.Serializable {
 
     private String quote;
 
@@ -29,6 +29,23 @@ public class Quote {
     @Override
     public String toString(){
         return "\nContent: " + quote + "\nAuthor: " + author + "\ncategory: " + category;
+    }
+
+    public Quote (String pQuote, String pAuthor){
+        author = pAuthor;
+        quote = pQuote;
+    }
+
+    public Quote clone (){
+        try{
+           Quote clone = (Quote) super.clone();
+            return clone;
+        }
+        catch(CloneNotSupportedException e){
+            return null;
+        }
+
+
     }
 
 

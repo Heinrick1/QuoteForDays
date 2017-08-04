@@ -45,21 +45,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             public void onClick(View v) {
                 // TODO replace stub intent with a call to the actual network utility in both buttons listeners
                 getQuotesFromServer("movie", mNbOfQuotesRequested );
-
-                /*Intent intent = new Intent(MainActivity.this, DisplayQuoteActivity.class);
-                intent.putExtra(getString(R.string.NBQUOTES), mNbOfQuotesRequested);
-                startActivity(intent);*/
-
             }
         });
 
         buttonFamousQuote.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 getQuotesFromServer("famous", mNbOfQuotesRequested );
-
-                /*Intent intent = new Intent(MainActivity.this, DisplayQuoteActivity.class);
-                intent.putExtra(getString(R.string.NBQUOTES), mNbOfQuotesRequested);
-                startActivity(intent);*/
             }
         });
         
@@ -145,8 +136,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     //What happends when the loader is done with doInBackground, the data has been fetched from the server
     @Override
     public void onLoadFinished(Loader<String> loader, String data) {
+        ArrayList<Quote> quoteList = JsonUtility.formatJsonInput(data);
+
          Intent intent = new Intent(MainActivity.this, DisplayQuoteActivity.class);
-                intent.putExtra(getString(R.string.QUOTE_LIST_EXTRA), data);
+                intent.putExtra(getString(R.string.QUOTE_LIST_EXTRA), quoteList);
+                intent.putExtra("calling-activity", ActivityConstants.ACTIVITY_DISP);
                 startActivity(intent);
     }
 
@@ -171,5 +165,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         loaderManager.restartLoader(QUOTE_FOR_DAYS_GEN_LOADER, queryBundle, this);
 
+    }
+
+    public interface ActivityConstants {
+        public static final int ACTIVITY_DISP = 1001;
+        public static final int ACTIVITY_LIST = 1002;
+        public static final int ACTIVITY_3 = 1003;
     }
 }
