@@ -12,6 +12,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -132,7 +133,8 @@ public class DisplayQuoteActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.saveItem:
-                Quote current = mPagerAdapter.curQuote();
+
+                Quote current = mPagerAdapter.getQuote(mPager.getCurrentItem());
                 addNewQuote(current.getAuthor(), current.getBody());
                 return true;
             case R.id.shareItem:
@@ -146,6 +148,12 @@ public class DisplayQuoteActivity extends AppCompatActivity {
                 startIntent.putExtra("calling-activity", MainActivity.ActivityConstants.ACTIVITY_LIST);
                 startActivity(startIntent);
                 return true;
+
+            case R.id.deleteItem:
+
+                Quote currentDel = mPagerAdapter.getQuote(mPager.getCurrentItem());
+                removeQuote2(currentDel.getBody());
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -159,6 +167,14 @@ public class DisplayQuoteActivity extends AppCompatActivity {
         return aDb.insert(QuoteDbContract.QuoteEntry.TABLE_NAME, null, cv);
     }
 
+    private void removeQuote (String body) {
+        aDb.execSQL("DELETE FROM " + QuoteDbContract.QuoteEntry.TABLE_NAME
+                + " WHERE " + QuoteDbContract.QuoteEntry.COLUMN_BODY + " = ' " + body + " ' " );
+    }
+
+    private void removeQuote2 (String body) {
+        aDb.delete(QuoteDbContract.QuoteEntry.TABLE_NAME, "quoteBody = ?", new String[] { body });
+    }
 
 }
 

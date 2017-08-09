@@ -98,5 +98,9 @@ public class QfdSwipeAdapter extends PagerAdapter {
         //return currentQuote.clone();
     };
 
+    public Quote getQuote(int position){
+        return aQuotes.get(position);
+    }
+
 
 }
