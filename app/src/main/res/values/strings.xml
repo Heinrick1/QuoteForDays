@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">QuotesForDays</string>
     <string name="main_screen_tv">How many quotes would you like ?</string>
-    <string name="movieButton">From Movies</string>
-    <string name="famousButton">From Someone</string>
+    <string name="movieButton">Show me something from a great movie.</string>
+    <string name="famousButton">Show me something a wise man once said.</string>
     <string name="tv_stub">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel efficitur enim. Sed ex orci, sollicitudin at rutrum et, luctus eu nisl. Nulla iaculis orci.</string>
     <string name="QUOTE_LIST_EXTRA">QUOTE_LIST_EXTRA</string>
 
